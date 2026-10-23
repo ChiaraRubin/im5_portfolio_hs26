@@ -14,4 +14,3 @@ function get_globals_socials() {
         return $item;
     }, array: $socials);
 }
-?>

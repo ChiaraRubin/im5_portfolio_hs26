@@ -164,6 +164,22 @@ body:has(.nav-toggle:checked) {
   }
 }
 
+/* Styling Projects */
+[data-page="project"] {
+  .image {
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .project-info {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1.2fr;
+    gap: var(--gap-around);
+    padding: var(--gap-around);
+  }
+}
+
 /* Styling of all available page components. */
 [data-page] {
   width: 100%;
