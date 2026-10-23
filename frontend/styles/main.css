@@ -55,7 +55,6 @@
     position: relative;
     z-index: 2;
   }
-
   .nav-container {
     position: fixed;
     inset: 0;
@@ -148,6 +147,20 @@ body:has(.nav-toggle:checked) {
         color: #ffffff;
       }
     }
+  }
+  .socials {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-self: center;
+    gap: 5%;
+    a {
+      text-decoration: none;
+    }
+  }
+
+  .socials img {
+    width: 30px;
   }
 }
 
