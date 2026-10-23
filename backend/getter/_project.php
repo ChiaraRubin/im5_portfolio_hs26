@@ -10,6 +10,20 @@ function get_project_by_id(int $id): array {
     $text     = carbon_get_post_meta($id, 'text');
     $details  = carbon_get_post_meta($id, 'details');
 
+    // Galerie: jede Zeile bekommt Spaltenanzahl und aufbereitete Bilder
+    $gallery_raw = carbon_get_post_meta($id, 'gallery') ?: [];
+    $gallery = [];
+    foreach ($gallery_raw as $row) {
+        $images = [];
+        foreach (($row['images'] ?? []) as $image_id_row) {
+            $images[] = get_media_by_id(id: $image_id_row, size: 'full');
+        }
+        $gallery[] = [
+            'columns' => (int) $row['columns'],
+            'images'  => $images,
+        ];
+    }
+
     // return data
     return [
         'image'    => $image,
@@ -17,5 +31,6 @@ function get_project_by_id(int $id): array {
         'subtitle' => $subtitle,
         'text'     => $text,
         'details'  => $details,
+        'gallery'  => $gallery,
     ];
 }

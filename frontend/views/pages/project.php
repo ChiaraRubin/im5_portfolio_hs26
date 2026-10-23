@@ -15,4 +15,14 @@ $project = get_project_by_id(id: get_the_ID());
         <div class="text"><?= wpautop($project['text']) ?></div>
         <div class="details"><?= wpautop($project['details']) ?></div>
     </div>
+    <section class="gallery">
+    <?php foreach ($project['gallery'] as $row) : ?>
+        <div class="gallery-row" style="--columns: <?= (int) $row['columns'] ?>">
+            <?php foreach ($row['images'] as $img) : ?>
+                <img src="<?= esc_url($img['src']) ?>" alt="<?= esc_attr($img['alt']) ?>">
+            <?php endforeach; ?>
+        </div>
+    <?php endforeach; ?>
+    </section>
+
 </main>
