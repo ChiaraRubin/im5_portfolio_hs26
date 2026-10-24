@@ -7,6 +7,12 @@ $project = get_project_by_id(id: get_the_ID());
 
     <div class="project-info">
         <div class="heading">
+            <p class="category">
+                <?php foreach ($project['project_categories'] as $category): ?>
+                 <span class="category-item"><?= esc_html($category) ?></span>
+                <?php endforeach; ?>
+            </p>
+
             <h1><?= esc_html($project['title']) ?></h1>
             <?php if ($project['subtitle']) : ?>
                 <p class="subtitle"><?= esc_html($project['subtitle']) ?></p>

@@ -24,6 +24,13 @@ function get_project_by_id(int $id): array {
         ];
     }
 
+    //load project_category 
+    $project_categories = array_map(callback: function($item){
+        return $item->name;
+    }, array: get_the_terms($id, 'project_category'));
+    
+
+
     // return data
     return [
         'image'    => $image,
@@ -32,5 +39,6 @@ function get_project_by_id(int $id): array {
         'text'     => $text,
         'details'  => $details,
         'gallery'  => $gallery,
+        'project_categories' => $project_categories,
     ];
 }
