@@ -138,3 +138,14 @@ function block_disabled_design_pages (): void {
 }
 
 add_action('admin_init', 'block_disabled_design_pages');
+
+
+add_action('wp_enqueue_scripts', function () {
+    wp_enqueue_script(
+        'filter',
+        get_template_directory_uri() . '/frontend/scripts/filter.js',
+        [],
+        null,
+        true
+    );
+});
