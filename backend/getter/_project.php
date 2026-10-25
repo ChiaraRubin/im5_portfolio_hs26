@@ -42,3 +42,49 @@ function get_project_by_id(int $id): array {
         'project_categories' => $project_categories,
     ];
 }
+
+function get_project_categories(): array {
+    $terms = get_terms(['taxonomy' => 'project_category', 'hide_empty' => false]);
+    if (is_wp_error($terms)) {
+        return [];
+    }
+    return array_map(function ($term) {
+        return [
+            'name' => $term->name,
+            'slug' => $term->slug,
+        ];
+    }, $terms);
+}
+
+function get_projects(int $limit = -1, string $category = ''): array {
+    $args = [
+        'post_type'      => 'project',
+        'posts_per_page' => $limit,
+    ];
+    if ($category) {
+        $args['tax_query'] = [[
+            'taxonomy' => 'project_category',
+            'field'    => 'slug',
+            'terms'    => $category,
+        ]];
+    }
+
+    $projects = [];
+    foreach (get_posts($args) as $post) {
+        $image_id = carbon_get_post_meta($post->ID, 'image');
+
+        $terms = get_the_terms($post->ID, 'project_category');
+        $slugs = [];
+        if ($terms && !is_wp_error($terms)) {
+            $slugs = array_map(fn($term) => $term->slug, $terms);
+        }
+
+        $projects[] = [
+            'title'      => get_the_title($post->ID),
+            'url'        => get_permalink($post->ID),
+            'image'      => get_media_by_id(id: $image_id, size: 'l'),
+            'categories' => $slugs,
+        ];
+    }
+    return $projects;
+}

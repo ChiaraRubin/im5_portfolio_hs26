@@ -226,6 +226,46 @@ body:has(.nav-toggle:checked) {
   }
 }
 
+[data-module="project_category"] {
+  display: flex;
+  gap: 20px;
+  padding: var(--gap-around);
+
+  .button {
+    flex: 1;
+    padding: 16px;
+    border: none;
+    border-radius: 999px;
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    cursor: pointer;
+  }
+  .button.is-active {
+    background-color: var(--color-black);
+  }
+}
+
+[data-module="project_teaser"] {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap-around);
+  padding: var(--gap-around);
+
+  .teaser {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+  .teaser[hidden] {
+    display: none;
+  }
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
 /* Styling of all available teaser components. */
 
 /* Styling of utility classes, can be added anywhere in the project. */

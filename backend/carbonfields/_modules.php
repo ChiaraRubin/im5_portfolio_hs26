@@ -12,6 +12,39 @@ Container::make('post_meta', 'Module')
                 Field::make('text', 'title', 'Titel')->set_required(),
                 Field::make('image', 'image', 'Bild')->set_required(),
             ])
+            // -> hero_front
+            ->add_fields('hero_front', 'Hero Startseite', [
+                Field::make('text', 'title', 'Titel')->set_required(),
+                Field::make('textarea', 'subline', 'Subline'),
+                Field::make('image', 'image', 'Bild')->set_required(),
+            ])
+            // -> text
+            ->add_fields('text', 'Text', [
+                Field::make('rich_text', 'text', 'Text')->set_required(),
+            ])
+            // -> project_category
+            ->add_fields('project_category', 'Kategorie-Filter', [
+                Field::make('text', 'title', 'Titel'),
+            ])
+            // -> project_teaser
+            ->add_fields('project_teaser', 'Projekt-Teaser-Raster', [
+                Field::make('number', 'limit', 'Anzahl Projekte')
+                    ->set_help_text('Leer lassen = alle Projekte'),
+                Field::make('select', 'category', 'Kategorie')
+                    ->set_options(function () {
+                        $options = ['' => 'Alle'];
+                        $terms = get_terms([
+                            'taxonomy'   => 'project_category',
+                            'hide_empty' => false,
+                        ]);
+                        if (!is_wp_error($terms)) {
+                            foreach ($terms as $term) {
+                                $options[$term->slug] = $term->name;
+                            }
+                        }
+                        return $options;
+                    }),
+            ])
             // todo: add new modules here
             // -> SETTINGS
             ->set_layout('tabbed-vertical')
@@ -28,6 +61,18 @@ function render_modules (): void {
         switch ($module['_type']) {
             case 'example':
                 $module['image'] = get_media_by_id($module['image'], 'full');
+                break;
+            case 'hero_front':
+                $module['image'] = get_media_by_id(id: $module['image'], size: 'full');
+                break;
+            case 'project_category':
+                $module['categories'] = get_project_categories();
+                break;
+            case 'project_teaser':
+                $module['projects'] = get_projects(
+                    limit: $module['limit'] ? (int) $module['limit'] : -1,
+                    category: $module['category'] ?? ''
+                );
                 break;
                 // todo: add data modifications for modules here as a new case
         }
