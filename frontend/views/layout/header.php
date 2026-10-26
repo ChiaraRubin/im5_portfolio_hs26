@@ -5,8 +5,9 @@ $logo = get_globals_logo();
 ?>
 
 <header data-layout="header">
-<img class= "logo" src="<?= $logo['src'] ?>" alt="<?= $logo['alt'] ?>">
-    <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden>
+<a class="logo-link" href="<?= esc_url(home_url('/')) ?>" aria-label="Zur Startseite">
+    <img class="logo" src="<?= esc_url($logo['src']) ?>" alt="<?= esc_attr($logo['alt']) ?>">
+</a>    <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden>
     <label for="nav-toggle" class="burger" aria-label="Menü öffnen">
         <span></span>
         <span></span>

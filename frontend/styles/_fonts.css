@@ -1,9 +1,18 @@
-/*--- My Font ---*/
-/*regular*/
-/*@font-face {
-    font-family: 'Name';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url('../assets/fonts/filename.woff2') format('woff2');
-}*/
+/*--- Betania Patmos ---*/
+@font-face {
+  font-family: "Betania Patmos";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/betania-patmos-v2-latin-regular.woff2")
+    format("woff2");
+}
+
+/*--- Poppins ---*/
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/poppins-v24-latin-regular.woff2") format("woff2");
+}

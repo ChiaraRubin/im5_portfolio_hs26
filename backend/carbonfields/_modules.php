@@ -45,6 +45,23 @@ Container::make('post_meta', 'Module')
                         return $options;
                     }),
             ])
+
+            // -> about
+            ->add_fields('about', 'About', [
+                Field::make('image', 'image', 'Bild')->set_required(),
+                Field::make('text', 'title', 'Titel')->set_required(),
+                Field::make('rich_text', 'text', 'Text')->set_required(),
+            ])
+
+            // -> contact
+            ->add_fields('contact', 'Kontakt', [
+                Field::make('file', 'video', 'Intro-Video (MP4)')
+                    ->set_type(['video'])
+                    ->set_required(),
+                Field::make('text', 'title', 'Titel')->set_required(),
+                Field::make('rich_text', 'text', 'Text')->set_required(),
+                Field::make('image', 'gif', 'Deko-GIF'),
+])
             // todo: add new modules here
             // -> SETTINGS
             ->set_layout('tabbed-vertical')
@@ -73,6 +90,15 @@ function render_modules (): void {
                     limit: $module['limit'] ? (int) $module['limit'] : -1,
                     category: $module['category'] ?? ''
                 );
+                break;
+
+            case 'about':
+                $module['image'] = get_media_by_id(id: $module['image'], size: 'xl');
+                break;
+
+            case 'contact':
+                $module['video'] = get_media_by_id(id: $module['video'], size: 'full');
+                $module['gif']   = $module['gif'] ? get_media_by_id(id: $module['gif'], size: 'full') : null;
                 break;
                 // todo: add data modifications for modules here as a new case
         }
