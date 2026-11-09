@@ -187,11 +187,13 @@ body:has(.nav-toggle:checked) {
 
 /* Styling Projects */
 [data-page="project"] {
+  padding-inline: var(--gap-around);
+
   .gallery {
     display: flex;
     flex-direction: column;
     gap: var(--gap-around);
-    padding: var(--gap-around);
+    padding-block: var(--gap-around);
   }
 
   .gallery-row {
@@ -210,7 +212,68 @@ body:has(.nav-toggle:checked) {
     display: grid;
     grid-template-columns: 1fr 2fr 1.2fr;
     gap: var(--gap-around);
-    padding: var(--gap-around);
+    padding-block: var(--gap-around);
+  }
+
+  .gallery-sticky {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--gap-around);
+    align-items: start;
+
+    .sticky-left {
+      position: sticky;
+      top: var(--header-height, 140px);
+    }
+
+    .sticky-left img,
+    .sticky-right img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .sticky-right {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-around);
+    }
+  }
+
+  .image {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .gallery-website {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--gap-around);
+    align-items: center;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .website-right {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .button-link {
+      display: block;
+      padding: 16px;
+      border-radius: 999px;
+      background-color: #ff0709;
+      color: var(--color-black);
+      text-align: center;
+      text-decoration: none;
+    }
   }
 }
 
@@ -421,6 +484,18 @@ body:has(.nav-toggle:checked) {
 /* BREAKPOINT: md */
 @media (max-width: 768px) {
   [data-page="project"] .gallery-row {
+    grid-template-columns: 1fr;
+  }
+
+  [data-page="project"] .gallery-sticky {
+    grid-template-columns: 1fr;
+  }
+
+  [data-page="project"] .sticky-left {
+    position: static;
+  }
+
+  [data-page="project"] .gallery-website {
     grid-template-columns: 1fr;
   }
 

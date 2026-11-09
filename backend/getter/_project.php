@@ -14,15 +14,36 @@ function get_project_by_id(int $id): array {
     $gallery_raw = carbon_get_post_meta($id, 'gallery') ?: [];
     $gallery = [];
     foreach ($gallery_raw as $row) {
-        $images = [];
-        foreach (($row['images'] ?? []) as $image_id_row) {
-            $images[] = get_media_by_id(id: $image_id_row, size: 'full');
+    if ($row['_type'] === 'sticky') {
+        $scroll = [];
+        foreach (($row['scroll_images'] ?? []) as $img_id) {
+            $scroll[] = get_media_by_id(id: $img_id, size: 'full');
         }
         $gallery[] = [
+            'type'   => 'sticky',
+            'sticky' => get_media_by_id(id: $row['sticky_image'], size: 'full'),
+            'images' => $scroll,
+        ];
+    } elseif ($row['_type'] === 'website') {
+        $gallery[] = [
+            'type'        => 'website',
+            'image_left'  => get_media_by_id(id: $row['image_left'], size: 'full'),
+            'image_right' => get_media_by_id(id: $row['image_right'], size: 'full'),
+            'button_text' => $row['button_text'],
+            'button_url'  => $row['button_url'],
+        ];
+    } else {
+        $images = [];
+        foreach (($row['images'] ?? []) as $img_id) {
+            $images[] = get_media_by_id(id: $img_id, size: 'full');
+        }
+        $gallery[] = [
+            'type'    => 'grid',
             'columns' => (int) $row['columns'],
             'images'  => $images,
         ];
     }
+}
 
     //load project_category 
     $project_categories = array_map(callback: function($item){
