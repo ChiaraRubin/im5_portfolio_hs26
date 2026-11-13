@@ -27,8 +27,11 @@ Container::make('post_meta', 'Module')
                 Field::make('text', 'title', 'Titel'),
             ])
             // -> project_teaser
+            // -> project_teaser
             ->add_fields('project_teaser', 'Projekt-Teaser-Raster', [
-                Field::make('number', 'limit', 'Anzahl Projekte')
+                Field::make('text', 'limit', 'Anzahl Projekte')
+                    ->set_attribute('type', 'number')
+                    ->set_attribute('min', 1)
                     ->set_help_text('Leer lassen = alle Projekte'),
                 Field::make('select', 'category', 'Kategorie')
                     ->set_options(function () {
@@ -45,6 +48,7 @@ Container::make('post_meta', 'Module')
                         return $options;
                     }),
             ])
+           
 
             // -> about
             ->add_fields('about', 'About', [

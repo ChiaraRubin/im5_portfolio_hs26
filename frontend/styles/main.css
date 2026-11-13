@@ -4,9 +4,9 @@
 /* Definition of base styles. */
 :root {
   /* fonts */
-  --font-heading: "Betania Patmos", cursive;
+  --font-heading: "Abril Fatface", serif;
   --font-body: "Poppins", sans-serif;
-  --font-h1: normal 64px/120% "Betania Patmos", cursive;
+  --font-h1: normal 64px/120% "Abril Fatface", serif;
 
   /* Header Height */
   --header-height: 120px;
@@ -189,6 +189,26 @@ body:has(.nav-toggle:checked) {
 [data-page="project"] {
   padding-inline: var(--gap-around);
 
+  --img-height: 80svh;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* Hauptbild */
+  & > .image {
+    width: 100%;
+  }
+
+  .project-info {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1.2fr;
+    gap: var(--gap-around);
+    padding-block: var(--gap-around);
+  }
+
   .gallery {
     display: flex;
     flex-direction: column;
@@ -200,19 +220,7 @@ body:has(.nav-toggle:checked) {
     display: grid;
     grid-template-columns: repeat(var(--columns, 1), 1fr);
     gap: var(--gap-around);
-
-    img {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-  }
-
-  .project-info {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1.2fr;
-    gap: var(--gap-around);
-    padding-block: var(--gap-around);
+    align-items: start;
   }
 
   .gallery-sticky {
@@ -226,13 +234,6 @@ body:has(.nav-toggle:checked) {
       top: var(--header-height, 140px);
     }
 
-    .sticky-left img,
-    .sticky-right img {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
     .sticky-right {
       display: flex;
       flex-direction: column;
@@ -240,24 +241,11 @@ body:has(.nav-toggle:checked) {
     }
   }
 
-  .image {
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-  }
-
   .gallery-website {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--gap-around);
     align-items: center;
-
-    img {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
 
     .website-right {
       display: flex;
@@ -276,7 +264,6 @@ body:has(.nav-toggle:checked) {
     }
   }
 }
-
 /* Styling of all available page components. */
 [data-page] {
   width: 100%;
@@ -324,7 +311,7 @@ body:has(.nav-toggle:checked) {
   }
 
   .subline {
-    margin-bottom: auto;
+    margin-bottom: 5rem;
     font-size: 1.2vw;
   }
 
@@ -334,6 +321,19 @@ body:has(.nav-toggle:checked) {
     flex: 0 0 50%;
     min-height: 0;
     object-fit: cover;
+  }
+}
+
+[data-module="text"] {
+  padding: var(--gap-around);
+  margin-top: 3rem;
+
+  p {
+    text-align: center;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
   }
 }
 

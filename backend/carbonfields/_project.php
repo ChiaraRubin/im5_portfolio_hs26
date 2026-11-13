@@ -22,6 +22,7 @@ Container::make('post_meta', 'Projekt')
                         '1' => '1 Bild',
                         '2' => '2 Bilder',
                         '3' => '3 Bilder',
+                        '4' => '4 Bilder',
                     ])
                     ->set_default_value('2'),
                 Field::make('media_gallery', 'images', 'Bilder')

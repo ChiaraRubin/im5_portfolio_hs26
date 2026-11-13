@@ -45,10 +45,13 @@ function get_project_by_id(int $id): array {
     }
 }
 
-    //load project_category 
-    $project_categories = array_map(callback: function($item){
-        return $item->name;
-    }, array: get_the_terms($id, 'project_category'));
+    
+// load project_category
+$terms = get_the_terms($id, 'project_category');
+$project_categories = [];
+if ($terms && !is_wp_error($terms)) {
+    $project_categories = array_map(fn($term) => $term->name, $terms);
+}
     
 
 
